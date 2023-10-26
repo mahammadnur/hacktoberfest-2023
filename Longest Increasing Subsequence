@@ -1,0 +1,36 @@
+Given an array of integers, find the length of the longest (strictly) increasing subsequence from the given array.
+
+Example 1:
+
+Input:
+N = 16
+A = {0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15}
+Output: 
+6
+Explanation:
+There are more than one LIS in this array. One such Longest increasing subsequence is {0,2,6,9,13,15}.
+
+
+
+def longest_increasing_subsequence(N, A):
+    if N == 0:
+        return 0
+
+    # Initialize an array to store the length of the longest increasing subsequence ending at each index
+    lis = [1] * N
+
+    for i in range(1, N):
+        for j in range(i):
+            if A[i] > A[j] and lis[i] < lis[j] + 1:
+                lis[i] = lis[j] + 1
+
+    # Find the maximum length in the lis array
+    max_length = max(lis)
+
+    return max_length
+
+# Example usage
+N = 16
+A = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+result = longest_increasing_subsequence(N, A)
+print(result)  # Output: 6
